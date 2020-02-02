@@ -1,7 +1,30 @@
 import React from "react"
 import { graphql, Link } from "gatsby"
 
-const Template = ({data, pageContext}) => {
+interface TemplateProps {
+  data: {
+    markdownRemark: {
+      frontmatter: {
+        title: string
+      },
+      html: string
+    }
+  },
+  pageContext: {
+    next: {
+      frontmatter: {
+        path: string
+      }
+    },
+    prev: {
+      frontmatter: {
+        path: string
+      }
+    }
+  }
+}
+
+const Template = ({data, pageContext}: TemplateProps) => {
   const {next, prev} = pageContext
   const {markdownRemark} = data;
   const title = markdownRemark.frontmatter.title
