@@ -12,6 +12,8 @@ module.exports = {
   },
   plugins: [
     'gatsby-plugin-typescript',
+    'gatsby-plugin-emotion',
+    'gatsby-plugin-tailwindcss',
     'gatsby-transformer-remark',
     {
       resolve: 'gatsby-source-filesystem',

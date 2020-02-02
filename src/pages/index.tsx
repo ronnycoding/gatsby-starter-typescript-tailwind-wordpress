@@ -1,5 +1,10 @@
 import React from 'react'
 import { graphql, Link } from 'gatsby'
+import styled from '@emotion/styled'
+
+const Container = styled.div`
+  ${tw`flex justify-center`};
+`
 
 import Header from '../components/header'
 
@@ -11,11 +16,11 @@ const Layout = ({data}) => {
       {edges.map(edge => {
         const { frontmatter } = edge.node
         return (
-          <div key={frontmatter.date} className="flex justify-center">
+          <Container key={frontmatter.date}>
             <Link to={frontmatter.path}>
               {frontmatter.title}
             </Link>
-          </div>
+          </Container>
         )
       })}
     </div>
