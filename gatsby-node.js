@@ -1,10 +1,12 @@
-const path = require("path")
+/* eslint-disable no-shadow */
+/* eslint-disable no-unused-vars */
+const path = require('path')
 
-exports.createPages = (({graphql, actions}) => {
+exports.createPages = ({graphql, actions}) => {
   const { createPage } = actions
 
   return new Promise((resolve, reject) => {
-    const blogPostTemplate = path.resolve('src/templates/blogPost.ts')
+    const blogPostTemplate = path.resolve('src/templates/blogPost.tsx')
 
     resolve(
       graphql(
@@ -22,8 +24,8 @@ exports.createPages = (({graphql, actions}) => {
               }
             }
           }
-        `
-      ).then(result => {
+        `,
+      ).then((result) => {
         const posts = result.data.allMarkdownRemark.edges
         posts.forEach(({ node }, index) => {
           const path = node.frontmatter.path
@@ -33,13 +35,13 @@ exports.createPages = (({graphql, actions}) => {
             context: {
               pathSlug: path,
               prev: index === 0 ? null : posts[index - 1].node,
-              next: index === (posts.length - 1) ? null : posts[index + 1].node
-            }
+              next: index === (posts.length - 1) ? null : posts[index + 1].node,
+            },
           })
 
           resolve()
         })
-      })
+      }),
     )
   })
-})
+}

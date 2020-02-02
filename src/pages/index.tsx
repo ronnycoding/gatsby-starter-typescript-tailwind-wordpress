@@ -1,29 +1,53 @@
 import React from 'react'
 import { graphql, Link } from 'gatsby'
 import styled from '@emotion/styled'
+import tw from 'tailwind.macro'
 
-const Container = styled.div`
-  ${tw`flex justify-center`};
+const Container = tw.div`flex justify-center`
+
+const StyledLink = styled(Link)`
+  font-family: Roboto;
 `
+
+const PageContainer = tw.div`text-gray-900 antialiased leading-tight`
+
 
 import Header from '../components/header'
 
-const Layout = ({data}) => {
+interface LayoutProps {
+  data: {
+    allMarkdownRemark: {
+      edges: [
+        {
+          node: {
+            frontmatter: {
+              date: String,
+              path: String,
+              title: String
+            }
+          }
+        }
+      ]
+    }
+  }
+}
+
+const Layout = ({data}: LayoutProps) => {
   const { edges } = data.allMarkdownRemark
   return (
-    <div>
+    <PageContainer>
       <Header />
       {edges.map(edge => {
         const { frontmatter } = edge.node
         return (
           <Container key={frontmatter.date}>
-            <Link to={frontmatter.path}>
+            <StyledLink to={frontmatter.path}>
               {frontmatter.title}
-            </Link>
+            </StyledLink>
           </Container>
         )
       })}
-    </div>
+    </PageContainer>
   )
 }
 
