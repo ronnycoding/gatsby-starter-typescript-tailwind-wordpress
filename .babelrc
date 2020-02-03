@@ -1,5 +1,24 @@
 {
-  "plugins": ["macros"],
+  "plugins": [
+    "macros",
+    [
+      "tailwind-components", {
+        "config": "./tailwind.config.js",
+        "format": "auto"
+      }
+    ],
+    ["styled-jsx/babel", {
+      "plugins": [
+        [
+          "styled-jsx-plugin-postcss",
+          {
+            "path":
+              "./postcss.config.js"
+          }
+        ]
+      ] 
+    }]
+  ],
   "presets": [
     [
       "babel-preset-gatsby",
