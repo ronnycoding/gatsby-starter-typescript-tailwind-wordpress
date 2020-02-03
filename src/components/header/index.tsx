@@ -20,8 +20,8 @@ interface TitleAndDescriptionProps {
   data: {
     site: {
       siteMetadata: {
-        title: String,
-        description: String
+        title: string,
+        description: string
       }
     }
   }

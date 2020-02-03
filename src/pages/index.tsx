@@ -18,9 +18,9 @@ interface LayoutProps {
         {
           node: {
             frontmatter: {
-              date: String,
-              path: String,
-              title: String
+              date: string,
+              path: string,
+              title: string
             }
           }
         }
