@@ -3,6 +3,10 @@ import { graphql, Link } from "gatsby"
 import styled from '@emotion/styled'
 import tw from 'tailwind.macro'
 
+import { Container, Row, Col } from 'react-grid-system'
+
+import Header from '../components/header'
+
 const StyledLink = styled(Link)`
   ${tw`font-sans text-lg text-gray-800 text-center no-underline mb-3`}
 `
@@ -44,24 +48,35 @@ const Template = ({data, pageContext}: TemplateProps) => {
   const title = markdownRemark.frontmatter.title
   const html = markdownRemark.html
   return (
-    <div>
-      <BlogTitle>{title}</BlogTitle>
-      <BlogDescription
-        className="blogpost"
-        dangerouslySetInnerHTML={{__html: html}}
-      />
-      {next && 
-        <StyledLink to={next.frontmatter.path}>
-          Next
-        </StyledLink>
-      }
-      <br />
-      {prev && 
-        <StyledLink to={prev.frontmatter.path}>
-          Previous
-        </StyledLink>
-      }
-    </div>
+    <>
+      <Header />
+      <Container>
+        <Row>
+          <Col>
+            <BlogTitle>{title}</BlogTitle>
+            <BlogDescription
+              className="blogpost"
+              dangerouslySetInnerHTML={{__html: html}}
+            />
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            {next && 
+              <StyledLink to={next.frontmatter.path}>
+                Next
+              </StyledLink>
+            }
+            <br />
+            {prev && 
+              <StyledLink to={prev.frontmatter.path}>
+                Previous
+              </StyledLink>
+            }
+          </Col>
+        </Row>
+      </Container>
+    </>
   )
 }
 
