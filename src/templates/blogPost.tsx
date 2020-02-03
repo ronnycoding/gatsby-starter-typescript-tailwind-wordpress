@@ -1,6 +1,20 @@
 import React from "react"
 import { graphql, Link } from "gatsby"
+import styled from '@emotion/styled'
+import tw from 'tailwind.macro'
 
+const StyledLink = styled(Link)`
+  ${tw`font-sans text-lg text-gray-800 text-center no-underline mb-3`}
+`
+
+const BlogTitle = styled.h2`
+  ${tw`text-3xl font-sans font-light text-gray-500`}
+`
+
+const BlogDescription = styled.div`
+  ${tw`text-lg font-sans font-light text-gray-600`}
+`
+// .text-lg
 interface TemplateProps {
   data: {
     markdownRemark: {
@@ -31,21 +45,21 @@ const Template = ({data, pageContext}: TemplateProps) => {
   const html = markdownRemark.html
   return (
     <div>
-      <h1>{title}</h1>
-      <div
+      <BlogTitle>{title}</BlogTitle>
+      <BlogDescription
         className="blogpost"
         dangerouslySetInnerHTML={{__html: html}}
       />
       {next && 
-        <Link to={next.frontmatter.path}>
+        <StyledLink to={next.frontmatter.path}>
           Next
-        </Link>
+        </StyledLink>
       }
       <br />
       {prev && 
-        <Link to={prev.frontmatter.path}>
+        <StyledLink to={prev.frontmatter.path}>
           Previous
-        </Link>
+        </StyledLink>
       }
     </div>
   )
