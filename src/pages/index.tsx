@@ -3,16 +3,15 @@ import { graphql, Link } from 'gatsby'
 import styled from '@emotion/styled'
 import tw from 'tailwind.macro'
 
+import Header from '../components/header'
+
 const Container = tw.div`flex justify-center`
 
 const StyledLink = styled(Link)`
-  font-family: Roboto;
+  ${tw`font-sans text-lg text-gray-800 text-center no-underline mb-3`}
 `
 
-const PageContainer = tw.div`text-gray-900 antialiased leading-tight`
-
-
-import Header from '../components/header'
+const PageContainer = tw.div`min-h-screen bg-gray-100`
 
 interface LayoutProps {
   data: {

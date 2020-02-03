@@ -1,5 +1,15 @@
 import React from 'react'
 import { StaticQuery, graphql } from 'gatsby'
+import tw from 'tailwind.macro'
+import styled from '@emotion/styled'
+
+const StyledTitle = styled.h2`
+  ${tw`font-sans text-3xl text-gray-900 font-normal`}
+`
+
+const StyledDescription = styled.p`
+  ${tw`font-sans text-sm text-gray-800 font-light`}
+`
 
 interface TitleAndDescriptionProps {
   data: {
@@ -17,8 +27,8 @@ const TitleAndDescription = ({data}: TitleAndDescriptionProps) => {
   const description = data.site.siteMetadata.description
   return (
     <div>
-      <h2>{title}</h2>
-      <p>{description}</p>
+      <StyledTitle>{title}</StyledTitle>
+      <StyledDescription>{description}</StyledDescription>
     </div>
   )
 }
