@@ -5,7 +5,7 @@ import tw from 'tailwind.macro'
 
 import { Container, Row, Col } from 'react-grid-system'
 
-import Header from '../components/header'
+import BaseLayout from '../components/base-layout'
 
 const StyledLink = styled(Link)`
   ${tw`font-sans text-lg text-gray-800 text-center no-underline mb-3`}
@@ -48,8 +48,7 @@ const Template = ({data, pageContext}: TemplateProps) => {
   const title = markdownRemark.frontmatter.title
   const html = markdownRemark.html
   return (
-    <>
-      <Header />
+    <BaseLayout>
       <Container>
         <Row>
           <Col>
@@ -76,7 +75,7 @@ const Template = ({data, pageContext}: TemplateProps) => {
           </Col>
         </Row>
       </Container>
-    </>
+    </BaseLayout>
   )
 }
 
