@@ -18,24 +18,21 @@ const StyledDescription = styled.p`
 
 interface TitleAndDescriptionProps {
   data: {
-    site: {
-      siteMetadata: {
-        title: string,
-        description: string
-      }
+    wordpressSiteMetadata: {
+      name: string,
+      description: string
     }
   }
 }
 
 const TitleAndDescription = ({data}: TitleAndDescriptionProps) => {
-  const title = data.site.siteMetadata.title
-  const description = data.site.siteMetadata.description
+  const { name, description } = data.wordpressSiteMetadata
   return (
     <Container>
       <Row>
         <Col>
           <StyledLink to={'/'}>
-            <StyledTitle>{title}</StyledTitle>
+            <StyledTitle>{name}</StyledTitle>
           </StyledLink>
           <StyledDescription>{description}</StyledDescription>
         </Col>
@@ -49,11 +46,9 @@ const Header = () => {
     <StaticQuery
       query={graphql`
         query {
-          site {
-            siteMetadata {
-              title
-              description
-            }
+          wordpressSiteMetadata {
+            name
+            description
           }
         }
       `}

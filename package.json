@@ -19,6 +19,7 @@
     "autoprefixer": "^9.7.4",
     "cssnano": "^4.1.10",
     "gatsby": "^2.19.7",
+    "gatsby-awesome-pagination": "^0.3.5",
     "gatsby-plugin-emotion": "^4.1.22",
     "gatsby-plugin-eslint": "^2.0.8",
     "gatsby-plugin-manifest": "^2.2.41",
@@ -27,8 +28,7 @@
     "gatsby-plugin-react-helmet": "^3.1.22",
     "gatsby-plugin-typescript": "^2.1.27",
     "gatsby-plugin-webfonts": "^1.1.2",
-    "gatsby-source-filesystem": "^2.1.47",
-    "gatsby-transformer-remark": "^2.6.49",
+    "gatsby-source-wordpress": "^3.1.60",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-grid-system": "^6.0.7",
@@ -47,6 +47,7 @@
     "babel-plugin-tailwind-components": "^0.5.10",
     "babel-preset-gatsby": "^0.2.28",
     "eslint": "^6.8.0",
+    "lodash": "^4.17.15",
     "prettier": "^1.19.1"
   },
   "repository": {
