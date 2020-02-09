@@ -10,6 +10,14 @@ module.exports = {
     description: 'This is my cool blog',
   },
   plugins: [
+    'gatsby-transformer-sharp',
+    'gatsby-plugin-sharp',
+    {
+      resolve: 'gatsby-theme-tailwindcss',
+      options: {
+        postCssPlugins: [require('autoprefixer')],
+      },
+    },
     {
       resolve: 'gatsby-source-wordpress',
       options: {

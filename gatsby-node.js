@@ -84,6 +84,7 @@ exports.createPages = ({ actions, graphql }) => {
             ? getOnlyPublished(allPosts)
             : allPosts
 
+
       // Iterate over the array of posts
       _.each(posts, ({ node: post }) => {
         // Create the Gatsby page for this WordPress post

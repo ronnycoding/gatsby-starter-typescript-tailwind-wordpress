@@ -1,91 +1,118 @@
 import React from 'react'
 import { graphql, Link } from 'gatsby'
-import styled from '@emotion/styled'
-import tw from 'tailwind.macro'
+import Img, { FixedObject } from 'gatsby-image'
 
 import BaseLayout from '../components/base-layout'
-
-const Container = tw.div`flex justify-center flex-col`
-
-const CategoriesContainer = tw.div`flex flex-col`
-
-const StyledLink = styled(Link)`
-  ${tw`font-sans text-lg text-red-800 no-underline mb-3`}
-`
-
-const StyledCategoryLink = styled(Link)`
-  ${tw`font-sans text-sm text-blue-500 mb-1`}
-`
-
 
 
 type TemplateProps = {
   data: {
     wordpressPost: {
-      content: string,
+      id: string,
       slug: string,
-      categories: {
-        name: string,
-        slug: string
-      },
-      // tags: {
-      //   name: string,
-      //   slug: string
-      // },
       title: string,
+      excerpt: string,
       date: string,
+      featured_media: {
+        localFile: {
+          childImageSharp: {
+            fixed: FixedObject
+          }
+        }
+      },
       author: {
+        avatar_urls: {
+          wordpress_96: string
+        },
         name: string,
         slug: string
       },
+      tags: [
+        {
+          name: string,
+          slug: string
+        }
+      ]
+      acf: {
+        time_reading: string,
+        content: string,
+        title: string
+      },
+      categories: [
+        {
+          name: string,
+          slug: string
+        }
+      ]
     }
   }
 }
 
 const BlogPostTemplate = ({data}: TemplateProps) => {
-  const { content, categories, title, date, author, slug} = data.wordpressPost
+  const {
+    title,
+    slug,
+    acf,
+    date,
+    featured_media
+  } = data.wordpressPost
   return (
     <BaseLayout>
-      <Container>
-        <StyledLink to={slug}>{title}</StyledLink>
-        <div dangerouslySetInnerHTML={{ __html: content }} />
-        {categories && (
-          <CategoriesContainer>
-            <p>Categories</p>
-            {categories.map(({ name, slug }) => (<StyledCategoryLink key={slug} to={slug}>{name}</StyledCategoryLink>))}
-          </CategoriesContainer>
-        )}
-      </Container>
+      <div className={`flex flex-col items-center justify-start`}>
+        <div className={`container flex flex-col`}>
+          <Img 
+            fixed={featured_media.localFile.childImageSharp.fixed}
+            className="w-full"
+            placeholderStyle={{ backgroundColor: `white` }}
+          />
+          <Link to={slug} className={`font-sans text-4xl justify-between font-bold`}>{title}</Link>
+          <p className={`font-sans text-1xl justify-between mb-4`}>{date}</p>
+          <div dangerouslySetInnerHTML={{ __html: acf.content.replace(/<p>/g, '<p class="font-sans pb-2">') }}/>
+        </div>
+      </div>
     </BaseLayout>
   )
 }
 
 export const query = graphql`
-  fragment PostFields on wordpress__POST {
-    id
-    slug
-    content
-    date(formatString: "MMMM DD, YYYY")
-    title
-  }
   query BlogPostByID($id: String!) {
     wordpressPost(id: { eq: $id }) {
-      id
       title
-      slug
       content
-      date(formatString: "MMMM DD, YYYY")
+      slug
       categories {
         name
         slug
       }
-      # tags {
-      #   name
-      #   slug
-      # }
-      author {
+      tags {
         name
         slug
+      }
+      acf {
+        content
+        title
+        time_reading
+      }
+      date(formatString: "MMMM DD, YYYY")
+      featured_media {
+        localFile {
+          childImageSharp {
+            fixed(width: 1200) {
+              base64
+              width
+              height
+              src
+              srcSet
+            }
+          }
+        }
+        author {
+          avatar_urls {
+            wordpress_96
+          }
+          name
+          slug
+        }
       }
     }
   }
