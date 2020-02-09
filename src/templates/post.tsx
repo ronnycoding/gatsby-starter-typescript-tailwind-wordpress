@@ -1,6 +1,6 @@
 import React from 'react'
 import { graphql, Link } from 'gatsby'
-import Img, { FixedObject } from 'gatsby-image'
+import Img, { FluidObject } from 'gatsby-image'
 
 import BaseLayout from '../components/base-layout'
 
@@ -16,7 +16,7 @@ type TemplateProps = {
       featured_media: {
         localFile: {
           childImageSharp: {
-            fixed: FixedObject
+            fluid: FluidObject
           }
         }
       },
@@ -58,17 +58,15 @@ const BlogPostTemplate = ({data}: TemplateProps) => {
   } = data.wordpressPost
   return (
     <BaseLayout>
-      <div className={`flex flex-col items-center justify-start`}>
-        <div className={`container flex flex-col`}>
-          <Img 
-            fixed={featured_media.localFile.childImageSharp.fixed}
-            className="w-full"
-            placeholderStyle={{ backgroundColor: `white` }}
-          />
-          <Link to={slug} className={`font-sans text-4xl justify-between font-bold`}>{title}</Link>
-          <p className={`font-sans text-1xl justify-between mb-4`}>{date}</p>
-          <div dangerouslySetInnerHTML={{ __html: acf.content.replace(/<p>/g, '<p class="font-sans pb-2">') }}/>
-        </div>
+      <div className={`container font-sans text-gray-800 p-4`}>
+        <Img 
+          fluid={featured_media.localFile.childImageSharp.fluid}
+          className="w-full"
+          placeholderStyle={{ backgroundColor: `white` }}
+        />
+        <Link to={slug} className={`text-4xl font-sans text-gray-800 font-bold`}>{title}</Link>
+        <p className={`font-sans text-1xl mb-4`}>{date}</p>
+        <div dangerouslySetInnerHTML={{ __html: acf.content.replace(/<p>/g, '<p class="font-sans pb-2 font-sans text-gray-800 text-justify">') }}/>
       </div>
     </BaseLayout>
   )
@@ -94,24 +92,23 @@ export const query = graphql`
         time_reading
       }
       date(formatString: "MMMM DD, YYYY")
+      author {
+        avatar_urls {
+          wordpress_96
+        }
+        name
+        slug
+      }
       featured_media {
         localFile {
           childImageSharp {
-            fixed(width: 1200) {
+            fluid {
               base64
-              width
-              height
               src
               srcSet
+              aspectRatio
             }
           }
-        }
-        author {
-          avatar_urls {
-            wordpress_96
-          }
-          name
-          slug
         }
       }
     }

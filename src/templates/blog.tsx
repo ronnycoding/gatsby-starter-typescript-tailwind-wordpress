@@ -72,11 +72,11 @@ const PostCard = ({
   date: string
 }) => {
   return (
-    <div className="rounded overflow-hidden shadow-lg bg-white max-w-xl my-3">
+    <div className="rounded overflow-hidden shadow-lg bg-white mb-6">
       <div className="w-full">
         <Img 
           fixed={featureImage}
-          className="w-full"
+          className="max-w-full"
           placeholderStyle={{ backgroundColor: `white` }}
         />
       </div>
@@ -116,8 +116,8 @@ const BlogTemplate = ({data, pageContext}: TemplateProps) => {
   const { nodes } = data.allWordpressPost
   return (
     <BaseLayout>
-      <div className={`flex flex-col items-center justify-start`}>
-        <div className={`container flex flex-col items-center`}>
+      <div className={`container`}>
+        <div className={`p-4 md:flex md:flex-col md:items-center`}>
           {nodes.map(({ id, slug, title, featured_media, author, excerpt, tags, acf, date}) => {
             return (
                 <PostCard
