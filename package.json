@@ -31,7 +31,7 @@
     "gatsby-plugin-typescript": "^2.1.27",
     "gatsby-plugin-webfonts": "^1.1.2",
     "gatsby-source-filesystem": "^2.1.48",
-    "gatsby-source-wordpress": "^3.1.60",
+    "gatsby-source-wordpress": "^4.0.8",
     "gatsby-theme-tailwindcss": "^1.0.2",
     "gatsby-transformer-sharp": "^2.3.14",
     "react": "^16.12.0",
